@@ -1,6 +1,8 @@
 // ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:yoga/creationAnnonce/Menu.dart';
+import 'package:yoga/creationAnnonce/Profile_page.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/main_welcome_page/social_page.dart';
 import 'package:yoga/sign_in_and_sign_up/sign_button.dart';
@@ -117,13 +119,24 @@ class LoginPage extends State<state> {
                     'mot de passe oublié ?',
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () => {},
+                  onTap: () => {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage(
+                                username: 'username', password: 'password')))
+                  },
                 ),
               ),
 
               const SizedBox(height: 25),
 
-              sign_button(onTap: () => {}),
+              sign_button(
+                onTap: () => {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()))
+                },
+              ),
 
               const SizedBox(height: 50),
 

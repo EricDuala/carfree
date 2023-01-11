@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
+import 'package:yoga/creationAnnonce/Ajout.dart';
 import 'package:yoga/sign_in_and_sign_up/sign_up_button.dart';
 
 class suite extends StatefulWidget {
@@ -132,7 +133,15 @@ class suite_conducteur extends State<suite> {
 
               const SizedBox(height: 25),
 
-              sign_up_button(onTap: () => {}),
+              sign_up_button(
+                onTap: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Ajout(
+                              username: 'username', password: 'password')))
+                },
+              ),
 
               const SizedBox(height: 25),
 

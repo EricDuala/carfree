@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 import 'package:yoga/sign_in_and_sign_up/sign_up_button.dart';
+import 'package:yoga/creationAnnonce/ride.dart';
 
 class stateUp extends StatefulWidget {
   const stateUp({super.key});
@@ -214,7 +215,22 @@ class SignUp extends State<stateUp> {
 
               const SizedBox(height: 25),
 
-              sign_up_button(onTap: () => {}),
+              sign_up_button(
+                onTap: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Ride(
+                                date: 'date',
+                                heure: 'heure',
+                                typeOffre: 'typeOffre',
+                                username: 'username',
+                                password: 'password',
+                                rider: 'rider',
+                                nb_place: '3',
+                              )))
+                },
+              ),
 
               const SizedBox(height: 25),
 

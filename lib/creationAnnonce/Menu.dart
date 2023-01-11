@@ -118,6 +118,7 @@ class MenuState extends State<Menu> {
                                   typeOffre: liste[index]['typeOffre'],
                                   username: widget.username,
                                   password: widget.password,
+                                  nb_place: liste[index]['nb_place'],
                                   rider: liste[index]['idUser']),
                               type: PageTransitionType.bottomToTop)),
                     ),

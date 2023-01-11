@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unnecessary_cast, avoid_unnecessary_containers, prefer_interpolation_to_compose_strings
+// ignore_for_file: avoid_print, unnecessary_cast, avoid_unnecessary_containers, prefer_interpolation_to_compose_strings, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -14,6 +14,7 @@ class Ride extends StatefulWidget {
   final String username;
   final String password;
   final String rider;
+  final String nb_place;
 
   const Ride(
       {super.key,
@@ -22,7 +23,8 @@ class Ride extends StatefulWidget {
       required this.typeOffre,
       required this.username,
       required this.password,
-      required this.rider});
+      required this.rider,
+      required this.nb_place});
 
   @override
   RideState createState() => RideState();
@@ -111,7 +113,12 @@ class RideState extends State<Ride> {
                         Card(
                           child: ListTile(
                             title: Text(
-                              widget.typeOffre + ' le ' + widget.date,
+                              widget.typeOffre +
+                                  ' le ' +
+                                  widget.date +
+                                  ' avec ' +
+                                  widget.nb_place +
+                                  ' places disponibles',
                               style: const TextStyle(fontSize: 25),
                             ),
                             isThreeLine: true,

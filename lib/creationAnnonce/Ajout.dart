@@ -62,7 +62,7 @@ class AjoutState extends State<Ajout> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add a ride'),
+          title: const Text('Ajouter une annonce'),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
@@ -100,11 +100,11 @@ class AjoutState extends State<Ajout> {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                           borderSide:
-                              BorderSide(color: Colors.blueAccent, width: 2.0)),
+                              BorderSide(color: Colors.black, width: 2.0)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(
-                              color: Colors.indigoAccent, width: 2.0))),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 2.0))),
                 ),
               ),
               Card(
@@ -117,26 +117,45 @@ class AjoutState extends State<Ajout> {
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                           borderSide:
-                              BorderSide(color: Colors.blueAccent, width: 2.0)),
+                              BorderSide(color: Colors.black, width: 2.0)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(
-                              color: Colors.indigoAccent, width: 2.0))),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 2.0))),
                 ),
               ),
+
+              Card(
+                child: TextFormField(
+                  controller: heureController,
+                  keyboardType: TextInputType.datetime,
+                  decoration: const InputDecoration(
+                      labelText: 'nombre de place',
+                      prefixIcon: Icon(Icons.person_add),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 2.0)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 2.0))),
+                ),
+              ),
+
               Card(
                 child: DropdownButtonFormField(
                   decoration: const InputDecoration(
                       labelText: 'Type d\'offre',
-                      prefixIcon: Icon(Icons.car_rental),
+                      prefixIcon: Icon(Icons.place),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                           borderSide:
-                              BorderSide(color: Colors.blueAccent, width: 2.0)),
+                              BorderSide(color: Colors.black, width: 2.0)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(
-                              color: Colors.indigoAccent, width: 2.0))),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 2.0))),
                   items: const [
                     DropdownMenuItem(
                       value: "Arrivée",
