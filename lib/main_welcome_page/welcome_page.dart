@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/main.dart';
-import 'package:yoga/main_welcome_page/social_page.dart';
+
+import '../sign_in_and_sign_up/login_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -67,7 +68,7 @@ class WelcomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SocialPage(),
+                          builder: (context) => const state(),
                         ),
                       );
                     },

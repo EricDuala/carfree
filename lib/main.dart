@@ -1,11 +1,11 @@
 // import 'dart:async';
-// ignore_for_file: unnecessary_null_comparison, avoid_print
+// ignore_for_file: unnecessary_null_comparison, avoid_print, unnecessary_const
 
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-
 import 'package:yoga/base_de_donnees/connexionDB.dart';
-
 import 'package:yoga/main_welcome_page/welcome_page.dart';
+
 // import 'package:splashscreen/splashscreen.dart';
 
 // ignore: constant_identifier_names
@@ -28,28 +28,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        title: 'CarFree',
-        debugShowCheckedModeBanner: false,
-        home: WelcomePage());
-  }
-}
-
-/* class SplashScreen1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen(
-      backgroundColor: Colors.white,
-      seconds: 10,
-      navigateAfterSeconds: WelcomePage(),
-      title: new Text(
-        'CarFree',
-        textScaleFactor: 2,
-      ),
-      image: new Image.asset('images/TotalEnergies.jpeg'),
-      loadingText: Text("Loading"),
-      photoSize: 100.0,
-      loaderColor: Colors.black,
+    return MaterialApp(
+      title: 'CarFree',
+      debugShowCheckedModeBanner: false,
+      home: AnimatedSplashScreen(
+          splash: 'images/TotalEnergies.jpeg',
+          duration: 3000,
+          backgroundColor: Colors.white,
+          splashTransition: SplashTransition.fadeTransition,
+          nextScreen: const WelcomePage()),
     );
   }
-} */
+}

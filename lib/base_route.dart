@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:http/http.dart' as http;
 
 const String baseUrl = "http://localhost:8000/api/";

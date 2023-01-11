@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:yoga/SignUp/SignUp.dart';
-import 'package:yoga/SignUp/SignUpConducteur.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:yoga/login.dart';
 import 'package:yoga/main.dart';
+import 'package:yoga/sign_in_and_sign_up/login_page.dart';
+import 'package:yoga/sign_in_and_sign_up/sign_conducteur.dart';
+import 'package:yoga/sign_in_and_sign_up/sign_up.dart';
 
 class SocialPage extends StatelessWidget {
   const SocialPage({super.key});
@@ -34,7 +34,7 @@ class SocialPage extends StatelessWidget {
             DelayedAnimation(
               delay: 1500,
               child: SizedBox(
-                height: 280,
+                height: 100,
                 child: Image.asset('images/logo.png'),
               ),
             ),
@@ -83,7 +83,7 @@ class SocialPage extends StatelessWidget {
                           context,
                           PageTransition(
                               type: PageTransitionType.leftToRightWithFade,
-                              child: const SignupPageConducteur()),
+                              child: const signUp()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -114,7 +114,7 @@ class SocialPage extends StatelessWidget {
                           context,
                           PageTransition(
                               type: PageTransitionType.leftToRightWithFade,
-                              child: const SignupPage()),
+                              child: const stateUp()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -139,25 +139,31 @@ class SocialPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.leftToRightWithFade,
-                              child: const LoginPage()),
-                        );
-                      },
-                      child: TextButton(
-                        child: const Text(
-                          "Vous avez déjà un compte? Connectez-vous",
-                          style: TextStyle(color: Colors.red),
-                        ),
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, "/login");
-                        },
-                      ),
-                    ),
+                    Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Déjà un Compte ?',
+                              style: TextStyle(color: Colors.grey[700]),
+                            ),
+                            GestureDetector(
+                                onTap: () => {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const state()))
+                                    },
+                                child: const Text(
+                                  'Connectez-vous',
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ],
+                        ))
                     /*  TextButton(
                       child: const Text(
                           "Vous avez déjà un compte? Connectez-vous"),

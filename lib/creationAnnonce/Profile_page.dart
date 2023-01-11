@@ -5,7 +5,7 @@ import 'package:yoga/base_de_donnees/CreateBD.dart';
 import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Ajout.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
-import 'package:yoga/login.dart';
+import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final String username;
@@ -258,7 +258,7 @@ class ProfilePageState extends State<ProfilePage> {
                                   PageTransition(
                                       type: PageTransitionType
                                           .leftToRightWithFade,
-                                      child: const LoginPage()),
+                                      child: const state()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
