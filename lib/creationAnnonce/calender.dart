@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+DateTime kNow = DateTime.now();
+DateTime kFirstDay = DateTime.utc(kNow.year, kNow.month - 3, kNow.day);
+DateTime kLastDay = DateTime.utc(kNow.year, kNow.month + 3, kNow.day);
+
+Color d_green = const Color(0xFF54D3C2);
+
 // ignore: must_be_immutable
 class calender extends StatelessWidget {
-  DateTime kNow = DateTime.now();
-  DateTime kFirstDay = DateTime.utc(kNow.year, kNow.month - 3, kNow.day);
-  DateTime kLastDay = DateTime.utc(kNow.year, kNow.month + 3, kNow.day);
-
-  Color d_green = const Color(0xFF54D3C2);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

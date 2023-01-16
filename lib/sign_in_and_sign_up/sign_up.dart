@@ -21,6 +21,16 @@ class SignUp extends State<stateUp> {
   final passwordController = TextEditingController();
   final valid_passwordController = TextEditingController();
 
+  String _dropdownValue = 'Conducteur';
+
+  void dropDownCallBack(String? selectedValue) {
+    if (selectedValue is String) {
+      setState(() {
+        _dropdownValue = selectedValue;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,6 +221,38 @@ class SignUp extends State<stateUp> {
                         filled: true,
                         hintText: 'verified password',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(
+                      labelText: 'votre profil',
+                      fillColor: Colors.grey.shade200,
+                      filled: true,
+                      prefixIcon: const Icon(Icons.place),
+                      focusedBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 2.0)),
+                      enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 2.0))),
+                  items: const [
+                    DropdownMenuItem(
+                      value: "passager",
+                      child: Text('passager'),
+                    ),
+                    DropdownMenuItem(
+                        value: "Conducteur", child: Text('conducteur'))
+                  ],
+                  value: _dropdownValue,
+                  onChanged: dropDownCallBack,
+                  iconSize: 42.0,
+                  //borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  iconEnabledColor: Colors.indigo,
+                  isExpanded: true,
+                ),
               ),
 
               const SizedBox(height: 25),
