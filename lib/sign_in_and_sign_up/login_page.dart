@@ -76,7 +76,7 @@ class LoginPage extends State<state> {
                       ),
                       fillColor: Colors.grey.shade200,
                       filled: true,
-                      hintText: 'email',
+                      hintText: 'email *',
                       hintStyle: TextStyle(color: Colors.grey[500])),
                 ),
               ),
@@ -104,7 +104,7 @@ class LoginPage extends State<state> {
                         ),
                         fillColor: Colors.grey.shade200,
                         filled: true,
-                        hintText: 'password',
+                        hintText: 'password *',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
 
@@ -114,7 +114,7 @@ class LoginPage extends State<state> {
                 margin: const EdgeInsets.only(top: 20, right: 20),
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 alignment: Alignment.centerRight,
-                child: GestureDetector(
+                child: InkWell(
                   child: const Text(
                     'mot de passe oublié ?',
                     style: TextStyle(color: Colors.black),
@@ -123,8 +123,7 @@ class LoginPage extends State<state> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfilePage(
-                                username: 'username', password: 'password')))
+                            builder: (context) => const ProfilePage()))
                   },
                 ),
               ),

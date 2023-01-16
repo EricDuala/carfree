@@ -1,10 +1,12 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:yoga/base_de_donnees/CreateBD.dart';
 import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
-import 'package:yoga/creationAnnonce/Profile_page.dart';
+import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 class Ajout extends StatefulWidget {
   final String username;
@@ -24,6 +26,7 @@ class AjoutState extends State<Ajout> {
   TextEditingController dateController = TextEditingController();
   TextEditingController heureController = TextEditingController();
   TextEditingController offreController = TextEditingController();
+  TextEditingController placeController = TextEditingController();
 
   void dropDownCallBack(String? selectedValue) {
     if (selectedValue is String) {
@@ -49,10 +52,8 @@ class AjoutState extends State<Ajout> {
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child: ProfilePage(
-                username: widget.username,
-                password: widget.password,
-              )), /*MaterialPageRoute(builder: (context) => Menu())*/
+              child:
+                  const state()), /*MaterialPageRoute(builder: (context) => Menu())*/
         );
       }
     });
@@ -61,8 +62,59 @@ class AjoutState extends State<Ajout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: Drawer(
+          child: Container(
+            color: Colors.white,
+            child: ListView(
+              padding: const EdgeInsets.only(top: 0),
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                Container(
+                    child: const UserAccountsDrawerHeader(
+                  accountName: Text(
+                    'Briand Duala',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  accountEmail: Text('eric.duala@totalenergies.cm',
+                      style: TextStyle(color: Colors.black)),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: AssetImage('images/TotalEnergies.jpeg'),
+                  ),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [Colors.white],
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft,
+                          tileMode: TileMode.clamp)),
+                ))
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
-          title: const Text('Ajouter une annonce'),
+          iconTheme: const IconThemeData(color: Colors.black),
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Ajouter une annonce',
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.search,
+                color: Colors.black,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.more_vert, color: Colors.black),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.notification_add, color: Colors.black),
+              onPressed: () {},
+            ),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
@@ -187,6 +239,8 @@ class AjoutState extends State<Ajout> {
               ),*/
               ElevatedButton(
                 onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()));
                   DatabaseHelper.instance.insertVehicule(TableTransport(
                       dateController.text,
                       heureController.text,

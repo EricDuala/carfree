@@ -52,10 +52,8 @@ class RideState extends State<Ride> {
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child: ProfilePage(
-                username: widget.username,
-                password: widget.password,
-              )), /*MaterialPageRoute(builder: (context) => Menu())*/
+              child:
+                  const ProfilePage()), /*MaterialPageRoute(builder: (context) => Menu())*/
         );
       } else if (index == 0) {
         Navigator.push(

@@ -1,18 +1,17 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, avoid_unnecessary_containers, non_constant_identifier_names, constant_identifier_names, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:yoga/AppBar/default_app_bar.dart';
-import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Ajout.dart';
 import 'package:yoga/creationAnnonce/Profile_page.dart';
-import 'package:yoga/creationAnnonce/ride.dart';
+import 'package:yoga/creationAnnonce/dashboard.dart';
+import 'package:yoga/drawer/header.dart';
+import 'package:yoga/main.dart';
+import 'package:yoga/main_welcome_page/welcome_page.dart';
 
 // ignore: use_key_in_widget_constructors
 class Menu extends StatefulWidget {
   late final String username;
   late final String password;
-  // ignore: non_constant_identifier_names
   checkUserLogin(username, password) {
     throw UnimplementedError();
   }
@@ -22,115 +21,123 @@ class Menu extends StatefulWidget {
 }
 
 class MenuState extends State<Menu> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      print(index);
-      if (index == 1) {
-        Navigator.push(
-          context,
-          PageTransition(
-              type: PageTransitionType.fade,
-              child: Ajout(
-                username: widget.username,
-                password: widget.password,
-              )), /*MaterialPageRoute(builder: (context) => Ajout())*/
-        );
-      } else if (index == 2) {
-        Navigator.push(
-          context,
-          PageTransition(
-              type: PageTransitionType.fade,
-              child: ProfilePage(
-                username: widget.username,
-                password: widget.password,
-              )), /*MaterialPageRoute(builder: (context) => Menu())*/
-        );
-      }
-    });
-  }
-
+  var currentPage = DrawerSections.dashboard;
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_typing_uninitialized_variables
+    var container;
+    if (currentPage == DrawerSections.dashboard) {
+      container = const MyDashboard();
+    } else if (currentPage == DrawerSections.profil_page) {
+      container = const Ajout(username: 'username', password: 'password');
+    } else if (currentPage == DrawerSections.login_page) {
+      container = const ProfilePage();
+    } else if (currentPage == DrawerSections.Setting) {
+      container = const WelcomePage();
+    } else if (currentPage == DrawerSections.Policy) {
+      container = main();
+    }
     return Scaffold(
-      /*appBar: AppBar(
-        actions: const <Widget>[
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Recherche',
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.orange,
-              ),
-            ),
-          ),
-        ],
-      ),*/
-      appBar:
-          DefaultAppBar(Title(color: Colors.white, child: const Text("Menu"))),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Accueil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.car_rental),
-            label: 'Ajouter',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        currentIndex: _selectedIndex, //New
-        onTap: _onItemTapped, //New
+      drawer: Drawer(
+        child: SingleChildScrollView(
+          child: Container(
+              child: Column(
+            children: [const MyHeaderDrawer(), MyDrawerList()],
+          )),
+        ),
       ),
-      body: FutureBuilder(
-        future: DatabaseHelper().getTableTransport(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.error);
-          return snapshot.hasData
-              ? ListView.builder(itemBuilder: (context, index) {
-                  // ignore: unused_local_variable
-                  var data = (snapshot.data);
-                  List? liste = snapshot.data as List?;
-                  return Card(
-                    child: ListTile(
-                      leading: const Icon(Icons.person),
-                      title: Text(liste![index]['date'],
-                          style: const TextStyle(fontSize: 20)),
-                      subtitle: Text(
-                        liste[index]['heure'] +
-                            '\n' +
-                            liste[index]['typeOffre'],
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      isThreeLine: true,
-                      onTap: () => Navigator.push(
-                          context,
-                          PageTransition(
-                              child: Ride(
-                                  date: liste[index]['date'],
-                                  heure: liste[index]['heure'],
-                                  typeOffre: liste[index]['typeOffre'],
-                                  username: widget.username,
-                                  password: widget.password,
-                                  nb_place: liste[index]['nb_place'],
-                                  rider: liste[index]['idUser']),
-                              type: PageTransitionType.bottomToTop)),
-                    ),
-                  );
-                })
-              : const Center(
-                  child: CircularProgressIndicator(),
-                );
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Menu',
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.search,
+              color: Colors.black,
+            ),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.more_vert, color: Colors.black),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.notification_add, color: Colors.black),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      body: container,
+    );
+  }
+
+  Widget MyDrawerList() {
+    return Container(
+      padding: const EdgeInsets.only(top: 15),
+      child: Column(
+        children: [
+          MenuItem(1, 'Mes Annonces', Icons.dashboard_outlined,
+              currentPage == DrawerSections.dashboard ? true : false),
+          MenuItem(2, 'Profil', Icons.person_outline,
+              currentPage == DrawerSections.profil_page ? true : false),
+          MenuItem(3, 'LogOut', Icons.logout_outlined,
+              currentPage == DrawerSections.login_page ? true : false),
+          const Divider(),
+          MenuItem(4, 'Setting', Icons.settings_outlined,
+              currentPage == DrawerSections.Setting ? true : false),
+          MenuItem(5, 'Policy privacy', Icons.privacy_tip_outlined,
+              currentPage == DrawerSections.Policy ? true : false),
+        ],
+      ),
+    );
+  }
+
+  Widget MenuItem(int id, String title, IconData icon, bool select) {
+    return Material(
+      color: select ? Colors.red : Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+          setState(() {
+            if (id == 1) {
+              currentPage = DrawerSections.dashboard;
+            } else if (id == 2) {
+              currentPage = DrawerSections.profil_page;
+            } else if (id == 3) {
+              currentPage = DrawerSections.login_page;
+            } else if (id == 4) {
+              currentPage = DrawerSections.Setting;
+            } else if (id == 5) {
+              currentPage = DrawerSections.Policy;
+            }
+          });
         },
-        /*Snapshot simplifie l'accès et la conversion des propriétés 
-        d'un objet de type JSON*/
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            children: [
+              Expanded(
+                  child: Icon(
+                icon,
+                size: 20,
+                color: Colors.blue,
+              )),
+              Expanded(
+                  flex: 4,
+                  child: Text(
+                    title,
+                    style: const TextStyle(color: Colors.black),
+                  ))
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+
+enum DrawerSections { dashboard, profil_page, login_page, Setting, Policy }

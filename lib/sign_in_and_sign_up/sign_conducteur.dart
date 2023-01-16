@@ -129,7 +129,7 @@ class Sign_Conducteur extends State<signUp> {
                       ),
                       fillColor: Colors.grey.shade200,
                       filled: true,
-                      hintText: 'phone number',
+                      hintText: 'phone number *',
                       hintStyle: TextStyle(color: Colors.grey[500])),
                 ),
               ),
@@ -157,7 +157,7 @@ class Sign_Conducteur extends State<signUp> {
                         ),
                         fillColor: Colors.grey.shade200,
                         filled: true,
-                        hintText: 'email',
+                        hintText: 'email *',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
 
@@ -183,7 +183,7 @@ class Sign_Conducteur extends State<signUp> {
                         ),
                         fillColor: Colors.grey.shade200,
                         filled: true,
-                        hintText: 'password',
+                        hintText: 'password *',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
 
@@ -209,7 +209,7 @@ class Sign_Conducteur extends State<signUp> {
                         ),
                         fillColor: Colors.grey.shade200,
                         filled: true,
-                        hintText: 'verified password',
+                        hintText: 'verified password *',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
 

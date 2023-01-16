@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class sign_up_button extends StatelessWidget {
-  const sign_up_button({super.key, required this.onTap});
+class modify_button extends StatelessWidget {
+  const modify_button({super.key, required this.onTap});
   final Function()? onTap;
 
   @override
@@ -14,12 +14,12 @@ class sign_up_button extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           margin: const EdgeInsets.only(left: 120, right: 120),
           decoration: BoxDecoration(
-              color: Colors.blueAccent, borderRadius: BorderRadius.circular(8)),
+              color: Colors.red, borderRadius: BorderRadius.circular(8)),
           child: const Center(
               child: Text(
-            'Sign Up',
+            'Modifier votre compte',
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
           )),
         ));
   }
