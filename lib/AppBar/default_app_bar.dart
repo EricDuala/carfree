@@ -100,7 +100,7 @@ class _DefaultAppBarState extends State<DefaultAppBar>
           return CustomPaint(
             painter: MyPainter(
               containerHeight: widget.preferredSize.height,
-              center: Offset(rippleStartX ?? 0, rippleStartY ?? 0),
+              center: Offset(rippleStartX, rippleStartY),
               radius: _animation.value * screenWidth,
               context: context,
             ),

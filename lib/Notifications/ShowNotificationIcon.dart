@@ -41,7 +41,7 @@ class BlinkingToast {
     );
     overlayState?.insert(overlayEntry);
 
-    await Future.delayed(duration!);
+    await Future.delayed(duration);
 
     overlayEntry.remove();
 
