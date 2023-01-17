@@ -52,8 +52,10 @@ class AjoutState extends State<Ajout> {
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child:
-                  const state()), /*MaterialPageRoute(builder: (context) => Menu())*/
+              child: const Ajout(
+                  username: 'username',
+                  password:
+                      'password')), /*MaterialPageRoute(builder: (context) => Menu())*/
         );
       }
     });
@@ -126,10 +128,6 @@ class AjoutState extends State<Ajout> {
               icon: Icon(Icons.car_rental),
               label: 'Ajouter',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profil',
-            ),
           ],
           currentIndex: _selectedIndex, //New
           onTap: _onItemTapped, //New
@@ -182,6 +180,42 @@ class AjoutState extends State<Ajout> {
                   controller: heureController,
                   keyboardType: TextInputType.datetime,
                   decoration: const InputDecoration(
+                      labelText: 'Lieu d\'arrivée',
+                      prefixIcon: Icon(Icons.watch),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 2.0)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 2.0))),
+                ),
+              ),
+
+              Card(
+                child: TextFormField(
+                  controller: heureController,
+                  keyboardType: TextInputType.datetime,
+                  decoration: const InputDecoration(
+                      labelText: 'lieu de départ',
+                      prefixIcon: Icon(Icons.watch),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 2.0)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 2.0))),
+                ),
+              ),
+
+              Card(
+                child: TextFormField(
+                  controller: heureController,
+                  keyboardType: TextInputType.datetime,
+                  decoration: const InputDecoration(
                       labelText: 'nombre de place',
                       prefixIcon: Icon(Icons.person_add),
                       focusedBorder: OutlineInputBorder(
@@ -195,7 +229,7 @@ class AjoutState extends State<Ajout> {
                 ),
               ),
 
-              Card(
+              /*           Card(
                 child: DropdownButtonFormField(
                   decoration: const InputDecoration(
                       labelText: 'Type d\'offre',
@@ -223,7 +257,7 @@ class AjoutState extends State<Ajout> {
                   isExpanded: true,
                 ),
               ),
-
+ */
               /*TextFormField(
                 decoration: InputDecoration(
                     labelText: 'Type d\'offre',

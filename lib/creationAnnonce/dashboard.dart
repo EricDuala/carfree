@@ -1,11 +1,8 @@
-// ignore_for_file: camel_case_types, sort_child_properties_last, sized_box_for_whitespace, non_constant_identifier_names
+// ignore_for_file: camel_case_types, sort_child_properties_last, sized_box_for_whitespace, non_constant_identifier_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yoga/creationAnnonce/calender.dart';
 import 'package:yoga/main.dart';
-import 'package:yoga/sign_in_and_sign_up/add_button.dart';
-import 'package:yoga/sign_in_and_sign_up/remove_button.dart';
 
 /* class dashboard extends StatefulWidget {
   const dashboard({super.key});
@@ -34,8 +31,10 @@ class SearchSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      color: Colors.grey[200],
+      decoration: const BoxDecoration(color: Colors.greenAccent, boxShadow: [
+        BoxShadow(color: Colors.grey, blurRadius: 4, offset: Offset(0, 3)),
+      ]),
+      height: 170,
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 10),
       child: Column(
         children: [
@@ -51,7 +50,7 @@ class SearchSection extends StatelessWidget {
                       BoxShadow(
                           color: Colors.grey,
                           blurRadius: 4,
-                          offset: Offset(0, 1)),
+                          offset: Offset(0, 3)),
                     ]),
                 child: const TextField(
                   decoration: InputDecoration(
@@ -62,10 +61,9 @@ class SearchSection extends StatelessWidget {
               )),
               const SizedBox(width: 10),
               Container(
-                height: 25,
-                width: 25,
+                height: 50,
+                width: 50,
                 decoration: const BoxDecoration(
-                  color: Colors.red,
                   boxShadow: [
                     BoxShadow(
                         color: Colors.grey,
@@ -85,13 +83,13 @@ class SearchSection extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
                         padding: const EdgeInsets.all(10),
-                        backgroundColor: d_red)),
+                        primary: d_red)),
               ),
             ],
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          /*  const SizedBox(
+            height: 30,
+          ), */
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -105,17 +103,14 @@ class SearchSection extends StatelessWidget {
                       style:
                           GoogleFonts.nunito(color: Colors.grey, fontSize: 15),
                     ),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     Text(
                       '18 janvier 2023',
                       style:
-                          GoogleFonts.nunito(color: Colors.black, fontSize: 15),
+                          GoogleFonts.nunito(color: Colors.black, fontSize: 17),
                     ),
-                    GestureDetector(
-                      onTap: () => {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => calender()))
-                      },
-                    )
                   ],
                 ),
               ),
@@ -129,10 +124,13 @@ class SearchSection extends StatelessWidget {
                       style:
                           GoogleFonts.nunito(color: Colors.grey, fontSize: 15),
                     ),
+                    const SizedBox(
+                      height: 8,
+                    ),
                     Text(
                       '3 places reservées',
                       style:
-                          GoogleFonts.nunito(color: Colors.black, fontSize: 15),
+                          GoogleFonts.nunito(color: Colors.black, fontSize: 17),
                     )
                   ],
                 ),
@@ -210,11 +208,11 @@ class CarSection extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       color: Colors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             height: 50,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   '10 covoiturages trouvés',
@@ -230,7 +228,7 @@ class CarSection extends StatelessWidget {
                     IconButton(
                         onPressed: () {},
                         icon: const Icon(
-                          Icons.filter_list_off_outlined,
+                          Icons.filter_list_outlined,
                           color: d_red,
                           size: 25,
                         ))
@@ -272,75 +270,65 @@ class CarMap extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            margin: const EdgeInsets.all(10),
             height: 140,
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   carData['prenom'] +
                       ' ' +
                       carData['nom'] +
-                      ' ' +
+                      ' de numéro ' +
                       carData['phone'],
                   style: GoogleFonts.nunito(
                       fontWeight: FontWeight.w800, fontSize: 18),
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
                 Text(
                   carData['marque'] +
-                      ' ' +
+                      ' de couleur ' +
                       carData['couleur'] +
-                      ' ' +
+                      ' et d\'immatriculaiton ' +
                       carData['immatriculation'],
                   style: GoogleFonts.nunito(color: Colors.blue, fontSize: 15),
-                )
+                ),
               ],
             ),
-            decoration: const BoxDecoration(
+            /*      decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
               ),
               color: Colors.white,
-            ),
+            ), */
           ),
           Container(
-            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(carData['lieu'] + ' dès ' + carData['heure']),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Icon(
                       Icons.place,
                       color: Colors.green,
-                      size: 14.0,
+                      size: 20.0,
                     )
                   ],
                 ),
                 Text(
-                  carData['places'] + " disponibl(s)",
+                  carData['places'] + " places disponible(s)",
                   style: GoogleFonts.nunito(color: Colors.red, fontSize: 12),
                 )
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          GestureDetector(
-            child: add_button(
-              onTap: () => {},
-            ),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          GestureDetector(
-            child: remove_button(
-              onTap: () => {},
-            ),
-          ),
+          const SizedBox(height: 10),
         ],
       ),
     );

@@ -1,12 +1,12 @@
 // ignore_for_file: avoid_print, avoid_unnecessary_containers, non_constant_identifier_names, constant_identifier_names, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:yoga/creationAnnonce/Ajout.dart';
-import 'package:yoga/creationAnnonce/Profile_page.dart';
+import 'package:yoga/mon_profil.dart';
 import 'package:yoga/creationAnnonce/dashboard.dart';
 import 'package:yoga/drawer/header.dart';
 import 'package:yoga/main.dart';
 import 'package:yoga/main_welcome_page/welcome_page.dart';
+import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 // ignore: use_key_in_widget_constructors
 class Menu extends StatefulWidget {
@@ -29,9 +29,9 @@ class MenuState extends State<Menu> {
     if (currentPage == DrawerSections.dashboard) {
       container = const MyDashboard();
     } else if (currentPage == DrawerSections.profil_page) {
-      container = const Ajout(username: 'username', password: 'password');
+      container = const MonProfil();
     } else if (currentPage == DrawerSections.login_page) {
-      container = const ProfilePage();
+      container = const state();
     } else if (currentPage == DrawerSections.Setting) {
       container = const WelcomePage();
     } else if (currentPage == DrawerSections.Policy) {
@@ -80,7 +80,7 @@ class MenuState extends State<Menu> {
       padding: const EdgeInsets.only(top: 15),
       child: Column(
         children: [
-          MenuItem(1, 'Mes Annonces', Icons.dashboard_outlined,
+          MenuItem(1, 'Dashboard', Icons.dashboard_outlined,
               currentPage == DrawerSections.dashboard ? true : false),
           MenuItem(2, 'Profil', Icons.person_outline,
               currentPage == DrawerSections.profil_page ? true : false),
