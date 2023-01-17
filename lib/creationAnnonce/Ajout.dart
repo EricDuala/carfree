@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_unnecessary_containers
+// ignore_for_file: avoid_unnecessary_containers, unnecessary_null_comparison
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:yoga/base_de_donnees/CreateBD.dart';
 import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
-import 'package:yoga/sign_in_and_sign_up/login_page.dart';
+import 'package:intl/intl.dart';
 
 class Ajout extends StatefulWidget {
   final String username;
@@ -19,20 +19,18 @@ class Ajout extends StatefulWidget {
 
 class AjoutState extends State<Ajout> {
   int _selectedIndex = 0;
-  String _dropdownValue = 'Arrivée';
 
   DateTime date = DateTime.now();
 
   TextEditingController dateController = TextEditingController();
   TextEditingController heureController = TextEditingController();
-  TextEditingController offreController = TextEditingController();
+  TextEditingController arriveController = TextEditingController();
+  TextEditingController departController = TextEditingController();
   TextEditingController placeController = TextEditingController();
 
   void dropDownCallBack(String? selectedValue) {
     if (selectedValue is String) {
-      setState(() {
-        _dropdownValue = selectedValue;
-      });
+      setState(() {});
     }
   }
 
@@ -58,6 +56,20 @@ class AjoutState extends State<Ajout> {
                       'password')), /*MaterialPageRoute(builder: (context) => Menu())*/
         );
       }
+    });
+  }
+
+  late TimeOfDay _timeOfDay = TimeOfDay.now();
+
+  void _timePicker() {
+    showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    ).then((value) {
+      setState(() {
+        _timeOfDay = value!;
+        heureController.text = _timeOfDay.format(context).toString();
+      });
     });
   }
 
@@ -137,10 +149,23 @@ class AjoutState extends State<Ajout> {
               child: ListView(
             padding: const EdgeInsets.only(
                 left: 20.0, bottom: 20.0, right: 20.0, top: 20.0),
-            children: <Widget>[
+            children: [
               //buildDatePicker(),
               Card(
                 child: TextField(
+                  onTap: () async {
+                    DateTime? pickeddate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime(2101));
+                    if (pickeddate != null) {
+                      setState(() {
+                        dateController.text =
+                            DateFormat('dd-MM-yyyy').format(pickeddate);
+                      });
+                    }
+                  },
                   controller: dateController,
                   keyboardType: TextInputType.datetime,
                   decoration: const InputDecoration(
@@ -159,6 +184,7 @@ class AjoutState extends State<Ajout> {
               ),
               Card(
                 child: TextFormField(
+                  onTap: _timePicker,
                   controller: heureController,
                   keyboardType: TextInputType.datetime,
                   decoration: const InputDecoration(
@@ -177,11 +203,11 @@ class AjoutState extends State<Ajout> {
 
               Card(
                 child: TextFormField(
-                  controller: heureController,
-                  keyboardType: TextInputType.datetime,
+                  controller: arriveController,
+                  keyboardType: TextInputType.streetAddress,
                   decoration: const InputDecoration(
                       labelText: 'Lieu d\'arrivée',
-                      prefixIcon: Icon(Icons.watch),
+                      prefixIcon: Icon(Icons.map_outlined),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                           borderSide:
@@ -195,11 +221,11 @@ class AjoutState extends State<Ajout> {
 
               Card(
                 child: TextFormField(
-                  controller: heureController,
-                  keyboardType: TextInputType.datetime,
+                  controller: departController,
+                  keyboardType: TextInputType.streetAddress,
                   decoration: const InputDecoration(
                       labelText: 'lieu de départ',
-                      prefixIcon: Icon(Icons.watch),
+                      prefixIcon: Icon(Icons.departure_board_outlined),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                           borderSide:
@@ -213,11 +239,11 @@ class AjoutState extends State<Ajout> {
 
               Card(
                 child: TextFormField(
-                  controller: heureController,
-                  keyboardType: TextInputType.datetime,
+                  controller: placeController,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                       labelText: 'nombre de place',
-                      prefixIcon: Icon(Icons.person_add),
+                      prefixIcon: Icon(Icons.person_outlined),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                           borderSide:
@@ -278,7 +304,7 @@ class AjoutState extends State<Ajout> {
                   DatabaseHelper.instance.insertVehicule(TableTransport(
                       dateController.text,
                       heureController.text,
-                      offreController.text));
+                      placeController.text));
                 },
                 child: const Text("Ajouter"),
               ),
