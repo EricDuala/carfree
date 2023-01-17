@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yoga/creationAnnonce/calender.dart';
 import 'package:yoga/main.dart';
 
 /* class dashboard extends StatefulWidget {
@@ -31,9 +32,7 @@ class SearchSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.greenAccent, boxShadow: [
-        BoxShadow(color: Colors.grey, blurRadius: 4, offset: Offset(0, 3)),
-      ]),
+      color: Colors.grey[200],
       height: 170,
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 10),
       child: Column(
@@ -75,7 +74,16 @@ class SearchSection extends StatelessWidget {
                   ),
                 ),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return calender();
+                          },
+                        ),
+                      );
+                    },
                     child: const Icon(
                       Icons.search,
                       size: 26,
