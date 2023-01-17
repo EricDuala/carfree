@@ -260,12 +260,12 @@ class CarMap extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-                color: Colors.grey.shade100,
+                color: Color.fromARGB(255, 80, 80, 80),
                 spreadRadius: 4,
                 blurRadius: 6,
-                offset: const Offset(0, 4))
+                offset: Offset(0, 5))
           ]),
       child: Column(
         children: [

@@ -1,10 +1,10 @@
 // ignore_for_file: unused_element, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/main_welcome_page/social_page.dart';
-import 'package:yoga/main_welcome_page/welcome_page.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 class MonProfil extends StatelessWidget {
@@ -12,9 +12,9 @@ class MonProfil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
-      appBar: AppBar(
+      /*     appBar: AppBar(
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(LineAwesomeIcons.angle_left),
@@ -28,7 +28,8 @@ class MonProfil extends StatelessWidget {
               onPressed: () {},
               icon: Icon(isDark ? LineAwesomeIcons.sun : LineAwesomeIcons.moon))
         ],
-      ),
+      ), */
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10),
@@ -42,23 +43,27 @@ class MonProfil extends StatelessWidget {
                     child: const Image(
                         image: AssetImage('images/TotalEnergies.jpeg')),
                   )),
-              const SizedBox(
-                height: 10,
-              ),
               Text(
                 'Briand Duala',
-                style: Theme.of(context).textTheme.headline4,
+                style: GoogleFonts.nunito(
+                    fontWeight: FontWeight.w800, fontSize: 13),
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Text(
                 'eric.duala@totalenergies.cm',
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              const SizedBox(
+                height: 5,
               ),
               const Text(
                 '666666666666666',
                 style: TextStyle(color: Colors.blueAccent),
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               SizedBox(
                 width: 200,
@@ -81,7 +86,7 @@ class MonProfil extends StatelessWidget {
                     )),
               ),
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
               const Divider(),
               const SizedBox(

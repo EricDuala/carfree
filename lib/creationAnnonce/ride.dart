@@ -71,6 +71,7 @@ class RideState extends State<Ride> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.white,
           title: const Text('Réserver cette ride'),
         ),
         bottomNavigationBar: BottomNavigationBar(

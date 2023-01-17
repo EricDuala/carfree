@@ -1,10 +1,10 @@
 // ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 import 'package:yoga/sign_in_and_sign_up/sign_up_button.dart';
-import 'package:yoga/creationAnnonce/ride.dart';
 
 class stateUp extends StatefulWidget {
   const stateUp({super.key});
@@ -222,55 +222,13 @@ class SignUp extends State<stateUp> {
                         hintText: 'verified password',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: DropdownButtonFormField(
-                  decoration: InputDecoration(
-                      labelText: 'votre profil',
-                      fillColor: Colors.grey.shade200,
-                      filled: true,
-                      prefixIcon: const Icon(Icons.place),
-                      focusedBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          borderSide:
-                              BorderSide(color: Colors.black, width: 2.0)),
-                      enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 2.0))),
-                  items: const [
-                    DropdownMenuItem(
-                      value: "passager",
-                      child: Text('passager'),
-                    ),
-                    DropdownMenuItem(
-                        value: "Conducteur", child: Text('conducteur'))
-                  ],
-                  value: _dropdownValue,
-                  onChanged: dropDownCallBack,
-                  iconSize: 42.0,
-                  //borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  iconEnabledColor: Colors.indigo,
-                  isExpanded: true,
-                ),
-              ),
 
               const SizedBox(height: 25),
 
               sign_up_button(
                 onTap: () => {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Ride(
-                                date: 'date',
-                                heure: 'heure',
-                                typeOffre: 'typeOffre',
-                                username: 'username',
-                                password: 'password',
-                                rider: 'rider',
-                                nb_place: '3',
-                              )))
+                      context, MaterialPageRoute(builder: (context) => Menu()))
                 },
               ),
 
