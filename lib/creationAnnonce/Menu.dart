@@ -42,7 +42,17 @@ class MenuState extends State<Menu> {
         child: SingleChildScrollView(
           child: Container(
               child: Column(
-            children: [const MyHeaderDrawer(), MyDrawerList()],
+            children: [
+              const UserAccountsDrawerHeader(
+                accountName: Text('Briand Duala'),
+                accountEmail: Text('eric.duala@totalenergies.cm'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: AssetImage('images/TotalEnergies.jpeg'),
+                ),
+              ),
+              const MyHeaderDrawer(),
+              MyDrawerList()
+            ],
           )),
         ),
       ),

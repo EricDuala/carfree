@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:yoga/creationAnnonce/dashbord_conducteur.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 import 'package:yoga/creationAnnonce/Ajout.dart';
@@ -138,8 +139,7 @@ class suite_conducteur extends State<suite> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Ajout(
-                              username: 'username', password: 'password')))
+                          builder: (context) => const DashBordConducteur()))
                 },
               ),
 

@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:yoga/creationAnnonce/calender.dart';
 import 'package:yoga/main.dart';
+import 'package:yoga/sign_in_and_sign_up/add_button.dart';
+import 'package:yoga/sign_in_and_sign_up/remove_button.dart';
 
 /* class dashboard extends StatefulWidget {
   const dashboard({super.key});
@@ -26,9 +29,14 @@ class MyDashboard extends StatelessWidget {
   }
 }
 
-class SearchSection extends StatelessWidget {
+class SearchSection extends StatefulWidget {
   const SearchSection({super.key});
 
+  @override
+  _SearchSection createState() => _SearchSection();
+}
+
+class _SearchSection extends State<SearchSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,8 +61,67 @@ class SearchSection extends StatelessWidget {
                     ]),
                 child: const TextField(
                   decoration: InputDecoration(
+                      icon: Icon(Icons.place_outlined),
                       hintText: 'lieu d\'arrivé',
-                      contentPadding: EdgeInsets.all(10),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 2),
+                      border: InputBorder.none),
+                ),
+              )),
+              const SizedBox(
+                width: 3,
+              ),
+              Expanded(
+                  child: Container(
+                padding: const EdgeInsets.only(left: 5),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: Offset(0, 3)),
+                    ]),
+                child: const TextField(
+                  /*      onTap: () async {
+                    DateTime? pickeddate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime(2101));
+                    if (pickeddate != null) {
+                      setState(() {
+                        Text(DateFormat('dd-MM-yyyy').format(pickeddate));
+                      });
+                    }
+                  }, */
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.date_range_outlined),
+                      hintText: 'date de départ',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 2),
+                      border: InputBorder.none),
+                ),
+              )),
+              const SizedBox(
+                width: 3,
+              ),
+              Expanded(
+                  child: Container(
+                padding: const EdgeInsets.only(left: 5),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: Offset(0, 3)),
+                    ]),
+                child: const TextField(
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.person),
+                      hintText: 'nombre de places',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 2),
                       border: InputBorder.none),
                 ),
               )),
@@ -279,7 +346,7 @@ class CarMap extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.all(10),
-            height: 140,
+            height: 90,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -315,12 +382,12 @@ class CarMap extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),
+            height: 30,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(carData['lieu'] + ' dès ' + carData['heure']),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Icon(
                       Icons.place,
@@ -337,6 +404,14 @@ class CarMap extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+          Container(
+            height: 40,
+            child: Row(
+/*               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, */
+              children: [add_button(onTap: () {}), remove_button(onTap: () {})],
+            ),
+          )
         ],
       ),
     );

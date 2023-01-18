@@ -11,10 +11,11 @@ class add_button extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          margin: const EdgeInsets.only(left: 120, right: 120),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          margin: const EdgeInsets.only(left: 50),
           decoration: BoxDecoration(
-              color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+              color: const Color.fromARGB(255, 0, 82, 150),
+              borderRadius: BorderRadius.circular(8)),
           child: const Center(
               child: Text(
             'reserver',
