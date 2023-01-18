@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoga/mon_profil.dart';
 import 'package:yoga/creationAnnonce/dashboard.dart';
-import 'package:yoga/drawer/header.dart';
 import 'package:yoga/main.dart';
 import 'package:yoga/main_welcome_page/welcome_page.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
@@ -42,6 +41,7 @@ class MenuState extends State<Menu> {
         child: SingleChildScrollView(
           child: Container(
               child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const UserAccountsDrawerHeader(
                 accountName: Text('Briand Duala'),
@@ -49,8 +49,13 @@ class MenuState extends State<Menu> {
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: AssetImage('images/TotalEnergies.jpeg'),
                 ),
+                /*   decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [Colors.white],
+                        begin: Alignment.bottomRight,
+                        end: Alignment.topLeft,
+                        tileMode: TileMode.clamp)), */
               ),
-              const MyHeaderDrawer(),
               MyDrawerList()
             ],
           )),
@@ -76,8 +81,14 @@ class MenuState extends State<Menu> {
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.notification_add, color: Colors.black),
-            onPressed: () {},
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
