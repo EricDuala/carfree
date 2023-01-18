@@ -49,12 +49,12 @@ class _SearchSection extends State<SearchSection> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[200],
-      height: 170,
-      padding: const EdgeInsets.fromLTRB(10, 25, 10, 10),
+      height: 100,
+      padding: const EdgeInsets.only(right: 5),
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 margin: const EdgeInsets.all(10),
@@ -63,19 +63,14 @@ class _SearchSection extends State<SearchSection> {
                   children: [
                     Text(
                       'Bienvenue Briand Duala dans votre Dashboard',
-                      style:
-                          GoogleFonts.nunito(color: Colors.black, fontSize: 18),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      'vous avez à votre actif 3 annonces',
-                      style:
-                          GoogleFonts.nunito(color: Colors.grey, fontSize: 15),
+                      style: GoogleFonts.nunito(
+                          color: Colors.blue[700], fontSize: 18),
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 15,
               ),
               Container(
                 margin: const EdgeInsets.all(10),
@@ -83,18 +78,10 @@ class _SearchSection extends State<SearchSection> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Pour un nombre de places minimal',
-                      style:
-                          GoogleFonts.nunito(color: Colors.grey, fontSize: 15),
+                      'Vous avez à votre actif 3 annonces',
+                      style: GoogleFonts.nunito(
+                          color: Colors.greenAccent[700], fontSize: 15),
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      'évalué à 3 places',
-                      style:
-                          GoogleFonts.nunito(color: Colors.black, fontSize: 17),
-                    )
                   ],
                 ),
               )
