@@ -2,11 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:yoga/creationAnnonce/calender.dart';
 import 'package:yoga/main.dart';
-import 'package:yoga/sign_in_and_sign_up/add_button.dart';
-import 'package:yoga/sign_in_and_sign_up/remove_button.dart';
+import 'package:yoga/sign_in_and_sign_up/button/add_button.dart';
+import 'package:yoga/sign_in_and_sign_up/button/remove_button.dart';
 
 /* class dashboard extends StatefulWidget {
   const dashboard({super.key});

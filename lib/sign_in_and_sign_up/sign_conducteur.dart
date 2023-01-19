@@ -2,9 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:yoga/delayed_animation.dart';
-import 'package:yoga/sign_in_and_sign_up/login_page.dart';
+import 'package:yoga/sign_in_and_sign_up/button/suivant.dart';
 import 'package:yoga/sign_in_and_sign_up/suite_conducteur.dart';
-import 'package:yoga/sign_in_and_sign_up/suivant.dart';
 
 class signUp extends StatefulWidget {
   const signUp({super.key});

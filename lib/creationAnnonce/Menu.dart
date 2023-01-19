@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print, avoid_unnecessary_containers, non_constant_identifier_names, constant_identifier_names, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:yoga/mon_profil.dart';
-import 'package:yoga/creationAnnonce/dashboard.dart';
+import 'package:yoga/creationAnnonce/dashboard/dashboard.dart';
 import 'package:yoga/main.dart';
 import 'package:yoga/main_welcome_page/welcome_page.dart';
+import 'package:yoga/profil/mon_profil.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 // ignore: use_key_in_widget_constructors

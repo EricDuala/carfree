@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Ajout.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
-import 'package:yoga/creationAnnonce/Profile_page.dart';
+import 'package:yoga/profil/Profile_page.dart';
 
 class Ride extends StatefulWidget {
   final String date;

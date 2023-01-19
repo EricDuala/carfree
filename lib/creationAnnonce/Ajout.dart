@@ -7,7 +7,7 @@ import 'package:yoga/base_de_donnees/CreateBD.dart';
 import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:intl/intl.dart';
-import 'package:yoga/creationAnnonce/dashbord_conducteur.dart';
+import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
 
 class Ajout extends StatefulWidget {
   final String username;

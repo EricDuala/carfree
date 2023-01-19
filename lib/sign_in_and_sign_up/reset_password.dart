@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoga/delayed_animation.dart';
-import 'package:yoga/sign_in_and_sign_up/reset_password_button.dart';
+import 'package:yoga/sign_in_and_sign_up/button/reset_password_button.dart';
 
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});

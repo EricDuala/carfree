@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yoga/creationAnnonce/Ajout.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/creationAnnonce/annonces_conducteur.dart';
-import 'package:yoga/mon_profil.dart';
+import 'package:yoga/profil/mon_profil.dart';
 
 class pageDashbord extends StatefulWidget {
   const pageDashbord({super.key});

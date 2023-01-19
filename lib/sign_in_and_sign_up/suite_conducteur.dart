@@ -1,11 +1,10 @@
 // ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:yoga/creationAnnonce/dashbord_conducteur.dart';
+import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
 import 'package:yoga/delayed_animation.dart';
+import 'package:yoga/sign_in_and_sign_up/button/sign_up_button.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
-import 'package:yoga/creationAnnonce/Ajout.dart';
-import 'package:yoga/sign_in_and_sign_up/sign_up_button.dart';
 
 class suite extends StatefulWidget {
   const suite({super.key});

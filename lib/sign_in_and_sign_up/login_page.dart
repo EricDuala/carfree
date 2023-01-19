@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
-import 'package:yoga/creationAnnonce/Profile_page.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/main_welcome_page/social_page.dart';
-import 'package:yoga/sign_in_and_sign_up/sign_button.dart';
+import 'package:yoga/profil/Profile_page.dart';
+import 'package:yoga/sign_in_and_sign_up/button/sign_button.dart';
 
 class state extends StatefulWidget {
   const state({super.key});
