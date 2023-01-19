@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:yoga/delayed_animation.dart';
-import 'package:yoga/sign_in_and_sign_up/modify_button.dart';
+import 'package:yoga/sign_in_and_sign_up/modify_compte_button.dart';
+import 'package:yoga/sign_in_and_sign_up/reset_password.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -83,8 +84,13 @@ class ProfilePageState extends State<ProfilePage> {
 
           const SizedBox(height: 25),
 
-          modify_button(
-            onTap: () => {},
+          ModifyCompteState(
+            onTap: () => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ResetPassword()))
+            },
           ),
         ])));
   }

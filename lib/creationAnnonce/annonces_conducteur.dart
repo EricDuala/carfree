@@ -69,9 +69,14 @@ class _SearchSection extends State<SearchSection> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+            ],
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Container(
                 margin: const EdgeInsets.all(10),
                 child: Column(
@@ -86,7 +91,7 @@ class _SearchSection extends State<SearchSection> {
                 ),
               )
             ],
-          )
+          ),
         ],
       ),
     );
