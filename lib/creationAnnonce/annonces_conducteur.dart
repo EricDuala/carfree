@@ -1,8 +1,11 @@
 // ignore_for_file: sized_box_for_whitespace, library_private_types_in_public_api, non_constant_identifier_names
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yoga/sign_in_and_sign_up/button/modify_button.dart';
+import 'package:http/http.dart' as http;
 
 class AnnonceConducteur extends StatefulWidget {
   const AnnonceConducteur({super.key});
@@ -12,6 +15,15 @@ class AnnonceConducteur extends StatefulWidget {
 }
 
 class _AnnonceConducteurState extends State<AnnonceConducteur> {
+  Future<List> getRechercherAnnonce() async {
+    var myUrl = Uri.parse(" http://localhost:8000/api/rechercher");
+    // ignore: unused_local_variable
+    http.Response response = await http.post(myUrl, headers: {
+      'Accept': 'application/json',
+    });
+    return json.decode(response.body);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,6 +110,7 @@ class _SearchSection extends State<SearchSection> {
   }
 }
 
+// ignore: must_be_immutable
 class CarSection extends StatelessWidget {
   final List CarList = [
     {

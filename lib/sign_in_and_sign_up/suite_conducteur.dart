@@ -1,10 +1,13 @@
 // ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/sign_in_and_sign_up/button/sign_up_button.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
+import 'package:http/http.dart' as http;
 
 class suite extends StatefulWidget {
   const suite({super.key});
@@ -14,6 +17,15 @@ class suite extends StatefulWidget {
 }
 
 class suite_conducteur extends State<suite> {
+  Future getEnregistrer() async {
+    var myUrl = Uri.parse(" http://localhost:8000/api/vehicule");
+    // ignore: unused_local_variable
+    http.Response response = await http.post(myUrl, headers: {
+      'Accept': 'application/json',
+    });
+    return json.decode(response.body);
+  }
+
   final immatriculationController = TextEditingController();
   final marqueController = TextEditingController();
   final couleurController = TextEditingController();

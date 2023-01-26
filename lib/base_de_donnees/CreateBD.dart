@@ -72,7 +72,8 @@ class TableAnnonce {
   late String _date_depart;
   late String _heure_depart;
   // ignore: non_constant_identifier_names
-  late String _type_offre;
+  late String _lieu_depart;
+  late String _lieu_arrive;
   late int _nb_place;
 
   TableAnnonce(
@@ -80,27 +81,31 @@ class TableAnnonce {
       String date,
       String heure,
       // ignore: non_constant_identifier_names
-      String offre,
+      String lieu_depart,
+      String lieu_arrive,
       int nb_place) {
     this._date_depart = date;
     this._heure_depart = heure;
-    this._type_offre = offre;
+    this._lieu_depart = lieu_depart;
+    this._lieu_arrive = lieu_arrive;
     this._nb_place = nb_place;
   }
 
   TableAnnonce.map(dynamic obj) {
-    this._id = obj['idTransport'];
+    this._id = obj['idAnnonce'];
     this._date_depart = obj['date'];
     this._heure_depart = obj['heure'];
-    this._type_offre = obj['TypeTransport'];
+    this._lieu_depart = obj['lieu_depart'];
+    this._lieu_arrive = obj['lieu_arrive'];
     this._nb_place = obj['nb_place'];
   }
 
-  int get idTransport => _id;
+  int get idAnnonce => _id;
   String get date => _date_depart;
   String get heure => _heure_depart;
   // ignore: non_constant_identifier_names
-  String get TypeTransport => _type_offre;
+  String get lieu_depart => _lieu_depart;
+  String get lieu_arrive => _lieu_arrive;
   int get nb_place => _nb_place;
 
   Map<String, dynamic> toMap() {
@@ -110,18 +115,20 @@ class TableAnnonce {
     }
     map['date'] = _date_depart;
     map['heure'] = _heure_depart;
-    map['TypeTransport'] = _type_offre;
+    map['lieu_depart'] = _lieu_depart;
+    map['lieu_arrive'] = _lieu_arrive;
     map['nb_place'] = _nb_place;
 
     return map;
   }
 
   TableAnnonce.fromMap(Map<String, dynamic> map) {
-    this._id = map['idTransport'];
+    this._id = map['idAnnonce'];
     this._date_depart = map['date'];
     this._heure_depart = map['heure'];
-    this._type_offre = map['TypeTransport'];
-    this._nb_place = map['id'];
+    this._lieu_depart = map['lieu_depart'];
+    this._lieu_arrive = map['lieu_arrive'];
+    this._nb_place = map['nb_place'];
   }
 }
 
@@ -166,7 +173,6 @@ class TableTransport {
     map['marque'] = _marque_vehicule;
     map['couleur'] = _couleur_vehicule;
     map['immatriculation'] = _immatriculation;
-    map['idUser'] = _immatriculation;
 
     return map;
   }

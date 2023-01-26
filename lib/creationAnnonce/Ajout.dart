@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers, unnecessary_null_comparison
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -8,6 +10,7 @@ import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:intl/intl.dart';
 import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
+import 'package:http/http.dart' as http;
 
 class Ajout extends StatefulWidget {
   final String username;
@@ -19,6 +22,15 @@ class Ajout extends StatefulWidget {
 }
 
 class AjoutState extends State<Ajout> {
+  Future getCreateAnnonce() async {
+    Uri myUrl = " http://localhost:8000/api/annonce" as Uri;
+    // ignore: unused_local_variable
+    http.Response response = await http.post(myUrl, headers: {
+      'Accept': 'application/json',
+    });
+    return json.decode(response.body);
+  }
+
   int _selectedIndex = 0;
 
   DateTime date = DateTime.now();

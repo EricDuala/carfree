@@ -1,11 +1,14 @@
 // ignore_for_file: avoid_print, avoid_unnecessary_containers, non_constant_identifier_names, constant_identifier_names, unused_local_variable
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:yoga/creationAnnonce/dashboard/dashboard.dart';
 import 'package:yoga/main.dart';
 import 'package:yoga/main_welcome_page/welcome_page.dart';
 import 'package:yoga/profil/mon_profil.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: use_key_in_widget_constructors
 class Menu extends StatefulWidget {
@@ -20,6 +23,14 @@ class Menu extends StatefulWidget {
 }
 
 class MenuState extends State<Menu> {
+  Future getData() async {
+    var myUrl = Uri.parse(" http://localhost:8000/api/enregistrer");
+    http.Response response = await http.post(myUrl, headers: {
+      'Accept': 'application/json',
+    });
+    return json.decode(response.body);
+  }
+
   var currentPage = DrawerSections.dashboard;
   @override
   Widget build(BuildContext context) {
