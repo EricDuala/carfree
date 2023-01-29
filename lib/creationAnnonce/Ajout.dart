@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:yoga/base_de_donnees/CreateBD.dart';
-import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:intl/intl.dart';
 import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
@@ -22,15 +21,6 @@ class Ajout extends StatefulWidget {
 }
 
 class AjoutState extends State<Ajout> {
-  Future getCreateAnnonce() async {
-    Uri myUrl = " http://localhost:8000/api/annonce" as Uri;
-    // ignore: unused_local_variable
-    http.Response response = await http.post(myUrl, headers: {
-      'Accept': 'application/json',
-    });
-    return json.decode(response.body);
-  }
-
   int _selectedIndex = 0;
 
   DateTime date = DateTime.now();
@@ -314,10 +304,10 @@ class AjoutState extends State<Ajout> {
                 onPressed: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Menu()));
-                  DatabaseHelper.instance.insertVehicule(TableTransport(
+/*                   DatabaseHelper.instance.insertVehicule(TableTransport(
                       dateController.text,
                       heureController.text,
-                      placeController.text));
+                      placeController.text)); */
                 },
                 child: const Text("Ajouter"),
               ),

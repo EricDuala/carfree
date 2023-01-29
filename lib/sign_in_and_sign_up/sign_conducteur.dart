@@ -1,12 +1,13 @@
-// ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names
-
-import 'dart:convert';
+// ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yoga/base_de_donnees/CreateBD.dart';
+import 'package:yoga/base_de_donnees/api_response.dart';
 import 'package:yoga/delayed_animation.dart';
+import 'package:yoga/services/user_services.dart';
 import 'package:yoga/sign_in_and_sign_up/button/suivant.dart';
 import 'package:yoga/sign_in_and_sign_up/suite_conducteur.dart';
-import 'package:http/http.dart' as http;
 
 class signUp extends StatefulWidget {
   const signUp({super.key});
@@ -16,14 +17,69 @@ class signUp extends StatefulWidget {
 }
 
 class Sign_Conducteur extends State<signUp> {
-  Future getEnregistrer() async {
-    var myUrl = Uri.parse(" http://localhost:8000/api/enregistrer");
-    // ignore: unused_local_variable
-    http.Response response = await http.post(myUrl, headers: {
-      'Accept': 'application/json',
-    });
-    return json.decode(response.body);
+  bool Loading = false;
+  void registerUser() async {
+    ApiResponse response = await register(
+        first_nameController.text,
+        last_nameController.text,
+        phoneController.text,
+        mailController.text,
+        passwordController.text,
+        valid_passwordController.text,
+        type_role);
+/*     final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.get(key) ?? 0; */
+    if (response.error == null) {
+      _saveAndRedirectToHome(response.data as TableUtilisateur);
+    } else {
+      setState(() {
+        Loading = !Loading;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('${response.error}')));
+    }
   }
+
+  void _saveAndRedirectToHome(TableUtilisateur user) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString('token', user.token ?? '');
+    await pref.setInt('userId', user.id ?? 0);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const suite()),
+        (route) => false);
+  }
+
+  @override
+  initState() {
+    super.initState();
+    registerUser();
+  }
+  /*  void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Failed'),
+            content: const Text('Check your email or password'),
+            actions: <Widget>[
+              ElevatedButton(
+                child: const Text(
+                  'Close',
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  DatabaseHelper databaseHelper = new DatabaseHelper();
+  String msgStatus = ''; */
+
+  final GlobalKey<FormState> Formkey = GlobalKey<FormState>();
 
   final first_nameController = TextEditingController();
   final last_nameController = TextEditingController();
@@ -31,6 +87,41 @@ class Sign_Conducteur extends State<signUp> {
   final mailController = TextEditingController();
   final passwordController = TextEditingController();
   final valid_passwordController = TextEditingController();
+  late int type_role = 1;
+/* 
+  _onPressed() {
+    setState(() {
+      if (mailController.text.trim().toLowerCase().isNotEmpty &&
+          passwordController.text.trim().isNotEmpty) {
+        databaseHelper
+            .registerData(
+                first_nameController.text.trim(),
+                last_nameController.text.trim(),
+                phoneController.text.trim(),
+                mailController.text.trim().toLowerCase(),
+                passwordController.text.trim(),
+                valid_passwordController.text.trim())
+            .whenComplete(() {
+          if (databaseHelper.status) {
+            _showDialog();
+            msgStatus = 'Check email or password';
+          } else {
+            Navigator.pushReplacementNamed(context, '/dashboard');
+          }
+        });
+      }
+    });
+  } */
+
+/*   String _dropdownValue = 'Conducteur';
+
+  void dropDownCallBack(String? selectedValue) {
+    if (selectedValue is String) {
+      setState(() {
+        _dropdownValue = selectedValue;
+      });
+    }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +142,7 @@ class Sign_Conducteur extends State<signUp> {
           ),
         ),
         body: SingleChildScrollView(
+          key: Formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -124,9 +216,11 @@ class Sign_Conducteur extends State<signUp> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
+                child: TextFormField(
                   controller: phoneController,
                   keyboardType: TextInputType.phone,
+                  validator: (val) =>
+                      val!.isEmpty ? 'numéro de téléphone invalide' : null,
                   decoration: InputDecoration(
                       icon: const Icon(
                         Icons.phone,
@@ -140,7 +234,7 @@ class Sign_Conducteur extends State<signUp> {
                       ),
                       fillColor: Colors.grey.shade200,
                       filled: true,
-                      hintText: 'phone number *',
+                      hintText: 'phone number',
                       hintStyle: TextStyle(color: Colors.grey[500])),
                 ),
               ),
@@ -150,11 +244,12 @@ class Sign_Conducteur extends State<signUp> {
               //password
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
+                child: TextFormField(
                     textInputAction: TextInputAction.done,
                     controller: mailController,
                     keyboardType: TextInputType.emailAddress,
-                    obscureText: false,
+                    validator: (val) =>
+                        val!.isEmpty ? 'adresse mail invalide' : null,
                     decoration: InputDecoration(
                         icon: const Icon(
                           Icons.email,
@@ -168,7 +263,7 @@ class Sign_Conducteur extends State<signUp> {
                         ),
                         fillColor: Colors.grey.shade200,
                         filled: true,
-                        hintText: 'email *',
+                        hintText: 'email',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
 
@@ -176,10 +271,13 @@ class Sign_Conducteur extends State<signUp> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
+                child: TextFormField(
                     textInputAction: TextInputAction.done,
                     controller: passwordController,
                     keyboardType: TextInputType.text,
+                    validator: (val) => val!.length < 8
+                        ? 'le mot de passe doit avoir au moins 8 caratère'
+                        : null,
                     obscureText: true,
                     decoration: InputDecoration(
                         icon: const Icon(
@@ -194,7 +292,7 @@ class Sign_Conducteur extends State<signUp> {
                         ),
                         fillColor: Colors.grey.shade200,
                         filled: true,
-                        hintText: 'password *',
+                        hintText: 'password',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
 
@@ -202,10 +300,13 @@ class Sign_Conducteur extends State<signUp> {
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
+                child: TextFormField(
                     textInputAction: TextInputAction.done,
                     controller: valid_passwordController,
                     keyboardType: TextInputType.text,
+                    validator: (val) => val != passwordController.text
+                        ? 'confirmer un mot de passe valide'
+                        : null,
                     obscureText: true,
                     decoration: InputDecoration(
                         icon: const Icon(
@@ -220,18 +321,30 @@ class Sign_Conducteur extends State<signUp> {
                         ),
                         fillColor: Colors.grey.shade200,
                         filled: true,
-                        hintText: 'verified password *',
+                        hintText: 'verified password',
                         hintStyle: TextStyle(color: Colors.grey[500]))),
               ),
 
               const SizedBox(height: 25),
 
-              suivant(
-                onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const suite()))
-                },
-              ),
+              Loading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : suivant(
+                      onTap: () => {
+                        if (Formkey.currentContext == null)
+                          {
+                            // loginUser()
+                            setState(() {
+                              Loading = !Loading;
+                              registerUser();
+                            })
+                          }
+                        /*      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu())) */
+                      },
+                    ),
             ],
           ),
         ));

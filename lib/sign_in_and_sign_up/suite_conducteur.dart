@@ -1,13 +1,14 @@
-// ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names
-
-import 'dart:convert';
+// ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yoga/base_de_donnees/CreateBD.dart';
+import 'package:yoga/base_de_donnees/api_response.dart';
 import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
 import 'package:yoga/delayed_animation.dart';
+import 'package:yoga/services/vehicule_services.dart';
 import 'package:yoga/sign_in_and_sign_up/button/sign_up_button.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
-import 'package:http/http.dart' as http;
 
 class suite extends StatefulWidget {
   const suite({super.key});
@@ -17,14 +18,44 @@ class suite extends StatefulWidget {
 }
 
 class suite_conducteur extends State<suite> {
-  Future getEnregistrer() async {
-    var myUrl = Uri.parse(" http://localhost:8000/api/vehicule");
-    // ignore: unused_local_variable
-    http.Response response = await http.post(myUrl, headers: {
-      'Accept': 'application/json',
-    });
-    return json.decode(response.body);
+  bool Loading = false;
+  void Vehicule() async {
+    ApiResponse response = await AddVehicule(immatriculationController.text,
+        marqueController.text, couleurController.text);
+/*     final prefs = await SharedPreferences.getInstance();
+    final key = 'token';
+    final value = prefs.get(key) ?? 0; */
+    if (response.error == null) {
+      _saveAndRedirectToHome(response.data as TableTransport);
+    } else {
+      setState(() {
+        Loading = false;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('${response.error}')));
+    }
   }
+
+  void _saveAndRedirectToHome(TableTransport user) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString('token', user.token ?? '');
+    await pref.setInt('userId', user.id ?? 0);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const DashBordConducteur()),
+        (route) => false);
+  }
+
+  @override
+  initState() {
+    super.initState();
+    Vehicule();
+  }
+
+/*   DatabaseHelper databaseHelper = new DatabaseHelper();
+
+  String msgStatus = ''; */
+
+  final GlobalKey<FormState> Formkey = GlobalKey<FormState>();
 
   final immatriculationController = TextEditingController();
   final marqueController = TextEditingController();
@@ -49,6 +80,7 @@ class suite_conducteur extends State<suite> {
           ),
         ),
         body: SingleChildScrollView(
+          key: Formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -145,14 +177,24 @@ class suite_conducteur extends State<suite> {
 
               const SizedBox(height: 25),
 
-              sign_up_button(
-                onTap: () => {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DashBordConducteur()))
-                },
-              ),
+              Loading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : sign_up_button(
+                      onTap: () => {
+                        if (Formkey.currentContext == null)
+                          {
+                            // loginUser()
+                            setState(() {
+                              Loading = !Loading;
+                              Vehicule();
+                            })
+                          }
+                        /*      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu())) */
+                      },
+                    ),
 
               const SizedBox(height: 25),
 

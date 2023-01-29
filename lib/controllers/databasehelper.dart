@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DatabaseHelper {
-  var ServeUrl = Uri.parse(" http://localhost:8000/api");
+  var ServeUrl = Uri.parse(" https://carfrere.000webhostapp.com/api");
 
   var status;
 

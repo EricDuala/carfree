@@ -1,12 +1,13 @@
-// ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, use_build_context_synchronously, prefer_const_declarations
-
-
+// ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, use_build_context_synchronously, prefer_const_declarations, unused_element, unnecessary_new, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:yoga/creationAnnonce/Menu.dart';
+import 'package:yoga/base_de_donnees/CreateBD.dart';
+import 'package:yoga/base_de_donnees/api_response.dart';
+import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/main_welcome_page/social_page.dart';
 import 'package:yoga/profil/Profile_page.dart';
+import 'package:yoga/services/user_services.dart';
 import 'package:yoga/sign_in_and_sign_up/button/sign_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,37 +19,54 @@ class state extends StatefulWidget {
 }
 
 class LoginPage extends State<state> {
-  read() async {
-    final prefs = await SharedPreferences.getInstance();
+  bool Loading = false;
+  void loginUser() async {
+    ApiResponse response =
+        await login(mailController.text, passwordController.text);
+/*     final prefs = await SharedPreferences.getInstance();
     final key = 'token';
-    final value = prefs.get(key) ?? 0;
-    if (value != '0') {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (BuildContext context) => const SocialPage(),
-      ));
+    final value = prefs.get(key) ?? 0; */
+    if (response.error == null) {
+      _saveAndRedirectToHome(response.data as TableUtilisateur);
+    } else {
+      setState(() {
+        Loading = false;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('${response.error}')));
     }
+  }
+
+  void _saveAndRedirectToHome(TableUtilisateur user) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString('token', user.token ?? '');
+    await pref.setInt('userId', user.id ?? 0);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const DashBordConducteur()),
+        (route) => false);
   }
 
   @override
   initState() {
-    read();
+    super.initState();
+    loginUser();
   }
 
-  Database
+/*   DatabaseHelper databaseHelper = new DatabaseHelper();
 
-  DatabaseHelper databaseHelper = new DatabaseHelper();
-  String msgStatus = '';
+  String msgStatus = ''; */
 
-  final TextEditingController _emailController = new TextEditingController();
-  final TextEditingController _passwordController = new TextEditingController();
+  final GlobalKey<FormState> Formkey = GlobalKey<FormState>();
 
-  _onPressed() {
+  final TextEditingController mailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
+/*   _onPressed() {
     setState(() {
-      if (_emailController.text.trim().toLowerCase().isNotEmpty &&
-          _passwordController.text.trim().isNotEmpty) {
-        databaseHelper
-            .loginData(_emailController.text.trim().toLowerCase(),
-                _passwordController.text.trim())
+      if (mailController.text.trim().toLowerCase().isNotEmpty &&
+          passwordController.text.trim().isNotEmpty) {
+        login(mailController.text.trim().toLowerCase(),
+                passwordController.text.trim())
             .whenComplete(() {
           if (databaseHelper.status) {
             _showDialog();
@@ -59,10 +77,7 @@ class LoginPage extends State<state> {
         });
       }
     });
-  }
-
-  final mailController = TextEditingController();
-  final passwordController = TextEditingController();
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +98,7 @@ class LoginPage extends State<state> {
           ),
         ),
         body: SingleChildScrollView(
+          key: Formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -106,9 +122,11 @@ class LoginPage extends State<state> {
               //mail
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
+                child: TextFormField(
                   controller: mailController,
                   keyboardType: TextInputType.emailAddress,
+                  validator: (val) =>
+                      val!.isEmpty ? 'adresse mail invalide' : null,
                   decoration: InputDecoration(
                       icon: const Icon(
                         Icons.email,
@@ -132,11 +150,13 @@ class LoginPage extends State<state> {
               //password
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: TextField(
+                child: TextFormField(
                     textInputAction: TextInputAction.done,
                     controller: passwordController,
                     keyboardType: TextInputType.text,
                     obscureText: true,
+                    validator: (val) =>
+                        val!.length < 8 ? 'mot de passe invalide' : null,
                     decoration: InputDecoration(
                         icon: const Icon(
                           Icons.vpn_key,
@@ -175,13 +195,24 @@ class LoginPage extends State<state> {
               ),
 
               const SizedBox(height: 25),
-
-              sign_button(
-                onTap: () => {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu()))
-                },
-              ),
+              Loading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : sign_button(
+                      onTap: () => {
+                        if (Formkey.currentContext == null)
+                          {
+                            // loginUser()
+                            setState(() {
+                              Loading = true;
+                              loginUser();
+                            })
+                          }
+                        /*      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu())) */
+                      },
+                    ),
 
               const SizedBox(height: 50),
 
@@ -213,4 +244,25 @@ class LoginPage extends State<state> {
           ),
         ));
   }
+
+/*   void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Failed'),
+            content: const Text('Check your email or password'),
+            actions: <Widget>[
+              new ElevatedButton(
+                child: const Text(
+                  'Close',
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  } */
 }

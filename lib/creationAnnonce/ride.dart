@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:yoga/base_de_donnees/connexionDB.dart';
 import 'package:yoga/creationAnnonce/Ajout.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/profil/Profile_page.dart';
@@ -93,7 +92,6 @@ class RideState extends State<Ride> {
           onTap: _onItemTapped, //New
         ),
         body: FutureBuilder(
-          future: DatabaseHelper().getAllTransport(),
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             print('builder');

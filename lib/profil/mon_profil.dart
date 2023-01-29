@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/main_welcome_page/social_page.dart';
+import 'package:yoga/services/user_services.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 class MonProfil extends StatelessWidget {
@@ -142,12 +143,12 @@ class MonProfil extends StatelessWidget {
               ListView(
                 icon: LineAwesomeIcons.alternate_sign_out,
                 onpress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const state(),
-                    ),
-                  );
+                  logout().then((value) => {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const state()),
+                            (route) => false)
+                      });
                 },
                 textColor: Colors.red,
                 endicon: false,
