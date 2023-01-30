@@ -1,4 +1,4 @@
-const baseUrl = 'http://10.0.0.26:8000/api';
+const baseUrl = 'http://169.254.171.85:8000/api';
 const registerUrl = '$baseUrl/enregistrer';
 const loginUrl = '$baseUrl/connexion';
 const userUrl = '$baseUrl/user';
@@ -10,6 +10,9 @@ const reserverUrl = '$baseUrl/reserver/{id}';
 const forgotUrl = '$baseUrl/forgot';
 const resetUrl = '$baseUrl/reset';
 const estActifUrl = '$baseUrl/estActif/{id}';
+const updateAnnonceUrl = '$baseUrl/update/{id}';
+const destroyAnnonceUrl = '$baseUrl/destroy/{id}';
+const showAnnonceUrl = '$baseUrl/showAnnonce';
 
 const serverError = 'Server error';
 const unAuthorizided = 'unAuthorizided';

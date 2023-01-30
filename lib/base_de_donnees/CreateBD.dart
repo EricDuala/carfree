@@ -92,33 +92,58 @@ class TableUtilisateur {
 }
 
 class TableAnnonce {
-  late int? _id;
-  late String? _date_depart;
-  late String? _heure_depart;
+  late int? id;
+  late String? date_depart;
+  late String? heure_depart;
   // ignore: non_constant_identifier_names
-  late String? _lieu_depart;
-  late String? _lieu_arrive;
-  late int? _nb_place;
-  late int? _est_actif;
+  late int? nb_place;
+  late String? lieu_depart;
+  late String? lieu_arrive;
+  late int? est_actif;
+  late String? token;
+  late TableUtilisateur? user;
+  late TableTransport? vehicule;
 
-  TableAnnonce(
-      // ignore: non_constant_identifier_names
-      String date,
-      String heure,
-      // ignore: non_constant_identifier_names
-      String lieu_depart,
-      String lieu_arrive,
-      int nb_place,
-      int est_actif) {
-    this._date_depart = date;
-    this._heure_depart = heure;
-    this._lieu_depart = lieu_depart;
-    this._lieu_arrive = lieu_arrive;
-    this._nb_place = nb_place;
-    this._est_actif = est_actif;
+  TableAnnonce({
+    this.id,
+    this.date_depart,
+    this.heure_depart,
+    this.lieu_depart,
+    this.lieu_arrive,
+    this.nb_place,
+    this.est_actif,
+    this.token,
+    this.user,
+    this.vehicule,
+  });
+
+  factory TableAnnonce.fromjson(Map<String, dynamic> json) {
+    return TableAnnonce(
+      id: json['TableAnnonce']['id'],
+      date_depart: json['TableAnnonce']['date_depart'],
+      heure_depart: json['TableAnnonce']['heure_depart'],
+      lieu_depart: json['TableAnnonce']['lieu_depart'],
+      lieu_arrive: json['TableAnnonce']['lieu_arrive'],
+      nb_place: json['TableAnnonce']['nb_place'],
+      est_actif: json['TableAnnonce']['est_actif'],
+      token: json['API TOKEN'],
+      user: TableUtilisateur(
+          id: json['TableUtilisateur']['id'],
+          first_name: json['TableUtilisateur']['first_name'],
+          last_name: json['TableUtilisateur']['last_name'],
+          phone_number: json['TableUtilisateur']['phone_number'],
+          email: json['TableUtilisateur']['email'],
+          image: json['TableUtilisateur']['image']),
+      vehicule: TableTransport(
+        id: json['TableTransport']['id'],
+        marque_vehicule: json['TableTransport']['marque_vehicule'],
+        couleur_vehicule: json['TableTransport']['couleur_vehicule'],
+        immatriculation: json['TableTransport']['immatriculation'],
+      ),
+    );
   }
 
-  TableAnnonce.map(dynamic obj) {
+  /*  TableAnnonce.map(dynamic obj) {
     this._id = obj['idAnnonce'];
     this._date_depart = obj['date'];
     this._heure_depart = obj['heure'];
@@ -160,7 +185,7 @@ class TableAnnonce {
     this._lieu_arrive = map['lieu_arrive'];
     this._nb_place = map['nb_place'];
     this._est_actif = map['est_actif'];
-  }
+  } */
 }
 
 class TableTransport {

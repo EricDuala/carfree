@@ -41,10 +41,8 @@ class RideState extends State<Ride> {
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child: Ajout(
-                username: widget.username,
-                password: widget.password,
-              )), /*MaterialPageRoute(builder: (context) => Ajout())*/
+              child:
+                  Ajout()), /*MaterialPageRoute(builder: (context) => Ajout())*/
         );
       } else if (index == 2) {
         Navigator.push(

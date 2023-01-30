@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:yoga/creationAnnonce/Ajout.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/creationAnnonce/annonces_conducteur.dart';
-import 'package:yoga/profil/mon_profil.dart';
 
 class pageDashbord extends StatefulWidget {
   const pageDashbord({super.key});
@@ -85,12 +84,7 @@ class _pageDashbordState extends State<pageDashbord> {
               child: InkWell(
                 onTap: () => {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Ajout(
-                                password: 'password',
-                                username: 'username',
-                              )))
+                      context, MaterialPageRoute(builder: (context) => Ajout()))
                 },
                 splashColor: Colors.green,
                 child: Center(
@@ -116,10 +110,9 @@ class _pageDashbordState extends State<pageDashbord> {
               margin: const EdgeInsets.all(10),
               child: InkWell(
                 onTap: () => {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MonProfil()))
+                  /*   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MonProfil()))
+                 */
                 },
                 splashColor: Colors.green,
                 child: Center(

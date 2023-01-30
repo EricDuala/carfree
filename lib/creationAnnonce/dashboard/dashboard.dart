@@ -1,21 +1,57 @@
-// ignore_for_file: camel_case_types, sort_child_properties_last, sized_box_for_whitespace, non_constant_identifier_names, deprecated_member_use, library_private_types_in_public_api
+// ignore_for_file: camel_case_types, sort_child_properties_last, sized_box_for_whitespace, non_constant_identifier_names, deprecated_member_use, library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yoga/base_de_donnees/api_response.dart';
+import 'package:yoga/constant.dart';
 import 'package:yoga/creationAnnonce/calender.dart';
 import 'package:yoga/main.dart';
+import 'package:yoga/services/annonces_services.dart';
+import 'package:yoga/services/user_services.dart';
 import 'package:yoga/sign_in_and_sign_up/button/add_button.dart';
 import 'package:yoga/sign_in_and_sign_up/button/remove_button.dart';
+import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
-/* class dashboard extends StatefulWidget {
+class dashboard extends StatefulWidget {
   const dashboard({super.key});
 
   @override
   MyDashboard createState() => MyDashboard();
-} */
+}
 
-class MyDashboard extends StatelessWidget {
-  const MyDashboard({super.key});
+class MyDashboard extends State<dashboard> {
+  List<dynamic> ListAnnonce = [];
+  int userId = 0;
+  bool Loading = false;
+
+  Future<void> ShowAnnonce() async {
+    userId = await getUserId();
+    ApiResponse response = await annonceDetails();
+    if (response.error == null) {
+      ListAnnonce = response.data as List<dynamic>;
+      Loading = Loading ? !Loading : Loading;
+    } else if (response.error == unAuthorizided) {
+      logout().then((value) => {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const state(),
+                ),
+                (route) => false)
+          });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('${response.error}')));
+      setState(() {
+        Loading = !Loading;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    ShowAnnonce();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -350,6 +386,7 @@ class CarMap extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+                  // '${annonce.user!.firtName} '+'${annonce.user!.lastName}'+'${annonce.user!.phoneNumber}',
                   carData['prenom'] +
                       ' ' +
                       carData['nom'] +

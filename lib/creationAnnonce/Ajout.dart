@@ -1,21 +1,20 @@
-// ignore_for_file: avoid_unnecessary_containers, unnecessary_null_comparison
-
-import 'dart:convert';
+// ignore_for_file: avoid_unnecessary_containers, unnecessary_null_comparison, non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:yoga/base_de_donnees/CreateBD.dart';
+import 'package:yoga/base_de_donnees/api_response.dart';
+import 'package:yoga/constant.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:intl/intl.dart';
 import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
-import 'package:http/http.dart' as http;
+import 'package:yoga/services/annonces_services.dart';
+import 'package:yoga/services/user_services.dart';
+import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 class Ajout extends StatefulWidget {
-  final String username;
-  final String password;
+  const Ajout({super.key});
 
-  const Ajout({super.key, required this.username, required this.password});
   @override
   AjoutState createState() => AjoutState();
 }
@@ -24,6 +23,36 @@ class AjoutState extends State<Ajout> {
   int _selectedIndex = 0;
 
   DateTime date = DateTime.now();
+
+  bool Loading = false;
+
+  void addAnnonce() async {
+    ApiResponse response = await AddAnnonce(
+        dateController.text as DateTime,
+        heureController.text,
+        placeController.text as int,
+        departController.text,
+        arriveController.text);
+    if (response.error == null) {
+      Navigator.of(context).pop();
+    } else if (response.error == unAuthorizided) {
+      logout().then((value) => {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const state(),
+                ),
+                (route) => false)
+          });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('${response.error}')));
+      setState(() {
+        Loading = !Loading;
+      });
+    }
+  }
+
+  final GlobalKey<FormState> Formkey = GlobalKey<FormState>();
 
   TextEditingController dateController = TextEditingController();
   TextEditingController heureController = TextEditingController();
@@ -53,10 +82,8 @@ class AjoutState extends State<Ajout> {
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child: const Ajout(
-                  username: 'username',
-                  password:
-                      'password')), /*MaterialPageRoute(builder: (context) => Menu())*/
+              child:
+                  Ajout()), /*MaterialPageRoute(builder: (context) => Menu())*/
         );
       }
     });
@@ -148,6 +175,7 @@ class AjoutState extends State<Ajout> {
           onTap: _onItemTapped, //New
         ),
         body: Center(
+          key: Formkey,
           child: Form(
               child: ListView(
             padding: const EdgeInsets.only(
@@ -155,7 +183,7 @@ class AjoutState extends State<Ajout> {
             children: [
               //buildDatePicker(),
               Card(
-                child: TextField(
+                child: TextFormField(
                   onTap: () async {
                     DateTime? pickeddate = await showDatePicker(
                         context: context,
@@ -165,7 +193,7 @@ class AjoutState extends State<Ajout> {
                     if (pickeddate != null) {
                       setState(() {
                         dateController.text =
-                            DateFormat('dd-MM-yyyy').format(pickeddate);
+                            DateFormat('yyyy-MM-dd').format(pickeddate);
                       });
                     }
                   },
@@ -242,6 +270,8 @@ class AjoutState extends State<Ajout> {
 
               Card(
                 child: TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? 'veuillez entrer un nombre' : null,
                   controller: placeController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(

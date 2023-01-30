@@ -1,18 +1,39 @@
-// ignore_for_file: unused_element, must_be_immutable
+// ignore_for_file: unused_element, must_be_immutable, unused_local_variable
+
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/main_welcome_page/social_page.dart';
 import 'package:yoga/services/user_services.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
-class MonProfil extends StatelessWidget {
-  const MonProfil({super.key});
+class _MonProfil extends StatefulWidget {
+  const _MonProfil({super.key});
 
   @override
+  MonProfil createState() => MonProfil();
+}
+
+class MonProfil extends State<_MonProfil> {
+  @override
   Widget build(BuildContext context) {
+    File? imageFile;
+    final picker = ImagePicker();
+
+    Future getImage() async {
+      // ignore: deprecated_member_use
+      final pickedFile = await picker.getImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        setState(() {
+          imageFile = File(pickedFile.path);
+        });
+      }
+    }
+
     // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
