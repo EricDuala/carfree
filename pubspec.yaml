@@ -52,6 +52,7 @@ dependencies:
   intl: ^0.17.0
   shared_preferences: ^2.0.17
   image_picker: ^0.8.6+1
+  flutter_svg: ^1.1.6
   
 
 
@@ -92,6 +93,12 @@ flutter:
     - images/ajout2.png
     - images/ride.png
     - images/create.png
+    - images/O.png
+    - images/OI.png
+    - images/OIP.png
+    - images/POI.png
+    - images/télécharge.png
+    - images/télécharger.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

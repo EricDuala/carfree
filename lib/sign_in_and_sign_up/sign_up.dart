@@ -327,24 +327,25 @@ class SignUp extends State<stateUp> {
 
               const SizedBox(height: 25),
 
-              Loading
+              /* Loading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : sign_up_button(
-                      onTap: () => {
-                        if (Formkey.currentContext == null)
+                  :  */
+              sign_up_button(
+                onTap: () => {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()))
+                  /*   if (Formkey.currentContext == null)
                           {
                             // loginUser()
                             setState(() {
                               Loading = !Loading;
                               registerUser();
                             })
-                          }
-                        /*      Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu())) */
-                      },
-                    ),
+                          } */
+                },
+              ),
 
               const SizedBox(height: 25),
 

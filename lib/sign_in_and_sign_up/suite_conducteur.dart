@@ -177,24 +177,27 @@ class suite_conducteur extends State<suite> {
 
               const SizedBox(height: 25),
 
-              Loading
+              /* Loading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : sign_up_button(
-                      onTap: () => {
-                        if (Formkey.currentContext == null)
+                  :  */
+              sign_up_button(
+                onTap: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DashBordConducteur()))
+                  /*  if (Formkey.currentContext == null)
                           {
                             // loginUser()
                             setState(() {
                               Loading = !Loading;
                               Vehicule();
                             })
-                          }
-                        /*      Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu())) */
-                      },
-                    ),
+                          } */
+                },
+              ),
 
               const SizedBox(height: 25),
 

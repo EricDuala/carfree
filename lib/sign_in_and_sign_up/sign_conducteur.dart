@@ -327,24 +327,25 @@ class Sign_Conducteur extends State<signUp> {
 
               const SizedBox(height: 25),
 
-              Loading
+              /* Loading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : suivant(
-                      onTap: () => {
-                        if (Formkey.currentContext == null)
-                          {
+                  : */
+              suivant(
+                onTap: () => {
+                  /* if (Formkey.currentContext == null)
+                       {
                             // loginUser()
                             setState(() {
                               Loading = !Loading;
                               registerUser();
                             })
-                          }
-                        /*      Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu())) */
-                      },
-                    ),
+                          } */
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const suite()))
+                },
+              ),
             ],
           ),
         ));

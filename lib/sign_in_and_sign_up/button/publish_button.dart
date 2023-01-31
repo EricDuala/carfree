@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-class modify_button extends StatelessWidget {
-  const modify_button({super.key, required this.onTap});
+class publish_button extends StatelessWidget {
+  const publish_button({super.key, required this.onTap});
   final Function()? onTap;
 
   @override
@@ -12,13 +12,13 @@ class modify_button extends StatelessWidget {
         onTap: onTap,
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          margin: const EdgeInsets.only(left: 170),
+          margin: const EdgeInsets.only(left: 50),
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 182, 12, 0),
-              borderRadius: BorderRadius.circular(10)),
+              color: const Color.fromARGB(255, 0, 82, 150),
+              borderRadius: BorderRadius.circular(8)),
           child: const Center(
               child: Text(
-            'modifier',
+            'publier',
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
           )),

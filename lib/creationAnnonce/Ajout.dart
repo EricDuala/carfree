@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:yoga/base_de_donnees/api_response.dart';
 import 'package:yoga/constant.dart';
-import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:intl/intl.dart';
+import 'package:yoga/creationAnnonce/annonces_conducteur.dart';
 import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
 import 'package:yoga/services/annonces_services.dart';
 import 'package:yoga/services/user_services.dart';
@@ -24,7 +24,7 @@ class AjoutState extends State<Ajout> {
 
   DateTime date = DateTime.now();
 
-  bool Loading = false;
+  /* bool Loading = false;
 
   void addAnnonce() async {
     ApiResponse response = await AddAnnonce(
@@ -53,7 +53,7 @@ class AjoutState extends State<Ajout> {
   }
 
   final GlobalKey<FormState> Formkey = GlobalKey<FormState>();
-
+ */
   TextEditingController dateController = TextEditingController();
   TextEditingController heureController = TextEditingController();
   TextEditingController arriveController = TextEditingController();
@@ -83,7 +83,7 @@ class AjoutState extends State<Ajout> {
           PageTransition(
               type: PageTransitionType.fade,
               child:
-                  Ajout()), /*MaterialPageRoute(builder: (context) => Menu())*/
+                  const Ajout()), /*MaterialPageRoute(builder: (context) => Menu())*/
         );
       }
     });
@@ -175,7 +175,7 @@ class AjoutState extends State<Ajout> {
           onTap: _onItemTapped, //New
         ),
         body: Center(
-          key: Formkey,
+          //key: Formkey,
           child: Form(
               child: ListView(
             padding: const EdgeInsets.only(
@@ -288,52 +288,12 @@ class AjoutState extends State<Ajout> {
                 ),
               ),
 
-              /*           Card(
-                child: DropdownButtonFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Type d\'offre',
-                      prefixIcon: Icon(Icons.place),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          borderSide:
-                              BorderSide(color: Colors.black, width: 2.0)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide:
-                              BorderSide(color: Colors.grey, width: 2.0))),
-                  items: const [
-                    DropdownMenuItem(
-                      value: "Arrivée",
-                      child: Text('Arrivée'),
-                    ),
-                    DropdownMenuItem(value: "Départ", child: Text('Départ'))
-                  ],
-                  value: _dropdownValue,
-                  onChanged: dropDownCallBack,
-                  iconSize: 42.0,
-                  //borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  iconEnabledColor: Colors.indigo,
-                  isExpanded: true,
-                ),
-              ),
- */
-              /*TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Type d\'offre',
-                    hintText: 'Départ / Arrivée',
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide:
-                            BorderSide(color: Colors.blueAccent, width: 2.0)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(
-                            color: Colors.indigoAccent, width: 2.0))),
-              ),*/
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AnnonceConducteur()));
 /*                   DatabaseHelper.instance.insertVehicule(TableTransport(
                       dateController.text,
                       heureController.text,

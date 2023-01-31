@@ -11,17 +11,19 @@ import 'package:yoga/main_welcome_page/social_page.dart';
 import 'package:yoga/services/user_services.dart';
 import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
-class _MonProfil extends StatefulWidget {
+/* class _MonProfil extends StatefulWidget {
   const _MonProfil({super.key});
 
   @override
   MonProfil createState() => MonProfil();
-}
+} */
 
-class MonProfil extends State<_MonProfil> {
+class MonProfil extends StatelessWidget {
+  const MonProfil({super.key});
+
   @override
   Widget build(BuildContext context) {
-    File? imageFile;
+    /*   File? imageFile;
     final picker = ImagePicker();
 
     Future getImage() async {
@@ -32,7 +34,7 @@ class MonProfil extends State<_MonProfil> {
           imageFile = File(pickedFile.path);
         });
       }
-    }
+    } */
 
     // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(

@@ -1,15 +1,11 @@
 // ignore_for_file: unused_field, avoid_unnecessary_containers, camel_case_types, use_build_context_synchronously, prefer_const_declarations, unused_element, unnecessary_new, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:yoga/base_de_donnees/CreateBD.dart';
-import 'package:yoga/base_de_donnees/api_response.dart';
-import 'package:yoga/creationAnnonce/dashboard/dashbord_conducteur.dart';
+import 'package:yoga/creationAnnonce/Menu.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/main_welcome_page/social_page.dart';
 import 'package:yoga/profil/Profile_page.dart';
-import 'package:yoga/services/user_services.dart';
 import 'package:yoga/sign_in_and_sign_up/button/sign_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class state extends StatefulWidget {
   const state({super.key});
@@ -19,7 +15,7 @@ class state extends StatefulWidget {
 }
 
 class LoginPage extends State<state> {
-  bool Loading = false;
+/*   bool Loading = false;
   void loginUser() async {
     ApiResponse response =
         await login(mailController.text, passwordController.text);
@@ -51,10 +47,7 @@ class LoginPage extends State<state> {
     super.initState();
     loginUser();
   }
-
-/*   DatabaseHelper databaseHelper = new DatabaseHelper();
-
-  String msgStatus = ''; */
+ */
 
   final GlobalKey<FormState> Formkey = GlobalKey<FormState>();
 
@@ -195,24 +188,25 @@ class LoginPage extends State<state> {
               ),
 
               const SizedBox(height: 25),
-              Loading
+              /*  Loading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : sign_button(
-                      onTap: () => {
-                        if (Formkey.currentContext == null)
+                  : */
+              sign_button(
+                onTap: () => {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Menu()))
+                  /* if (Formkey.currentContext == null)
                           {
                             // loginUser()
                             setState(() {
                               Loading = true;
                               loginUser();
                             })
-                          }
-                        /*      Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Menu())) */
-                      },
-                    ),
+                          } */
+                },
+              ),
 
               const SizedBox(height: 50),
 

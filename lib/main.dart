@@ -4,6 +4,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:yoga/main_welcome_page/welcome_page.dart';
+import 'package:yoga/page_reserver.dart';
 
 // import 'package:splashscreen/splashscreen.dart';
 

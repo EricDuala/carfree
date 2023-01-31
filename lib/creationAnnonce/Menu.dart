@@ -9,12 +9,6 @@ import 'package:yoga/sign_in_and_sign_up/login_page.dart';
 
 // ignore: use_key_in_widget_constructors
 class Menu extends StatefulWidget {
-  late final String username;
-  late final String password;
-  checkUserLogin(username, password) {
-    throw UnimplementedError();
-  }
-
   @override
   MenuState createState() => MenuState();
 }
@@ -26,9 +20,9 @@ class MenuState extends State<Menu> {
     // ignore: prefer_typing_uninitialized_variables
     var container;
     if (currentPage == DrawerSections.dashboard) {
-      container = MyDashboard();
+      container = const dashboard();
     } else if (currentPage == DrawerSections.profil_page) {
-      container = MonProfil();
+      container = const MonProfil();
     } else if (currentPage == DrawerSections.login_page) {
       container = const state();
     } else if (currentPage == DrawerSections.Setting) {

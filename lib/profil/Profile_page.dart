@@ -1,11 +1,9 @@
 // ignore_for_file: avoid_print
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:yoga/delayed_animation.dart';
 import 'package:yoga/sign_in_and_sign_up/button/modify_compte_button.dart';
 import 'package:yoga/sign_in_and_sign_up/reset_password.dart';
-import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -15,15 +13,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class ProfilePageState extends State<ProfilePage> {
-  Future getEnregistrer() async {
-    var myUrl = Uri.parse(" http://localhost:8000/api/forgot");
-    // ignore: unused_local_variable
-    http.Response response = await http.post(myUrl, headers: {
-      'Accept': 'application/json',
-    });
-    return json.decode(response.body);
-  }
-
   TextEditingController mailController = TextEditingController();
 
   // ignore: unnecessary_new
