@@ -9,7 +9,6 @@ import 'package:yoga/vehicule_card.dart';
 
 class ReserverAnnonce extends StatelessWidget {
   const ReserverAnnonce({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
